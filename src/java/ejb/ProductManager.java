@@ -22,13 +22,13 @@ public class ProductManager {
     
     @PersistenceContext
     EntityManager em;
-
-
-    public List<Product> selectProducts(){
-TypedQuery<Product> q=em.createNamedQuery("Product.selectAll",Product.class);
-
     
+    public List<Product> selectProducts(int from, int count) {
+        TypedQuery<Product> q = em.createNamedQuery("Product.selectAll", Product.class);
+        q.setFirstResult(from);
+        q.setMaxResults(count);
+        
         return q.getResultList();
-    
+        
     }
 }
